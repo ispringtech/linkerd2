@@ -279,6 +279,7 @@ func (conf *ResourceConfig) GetOverriddenValues() (*l5dcharts.Values, error) {
 
 	copyValues.Proxy.PodInboundPorts = getPodInboundPorts(conf.pod.spec)
 	conf.applyAnnotationOverrides(copyValues)
+	conf.applyAnnotationEnvironmentVariables(copyValues)
 	return copyValues, nil
 }
 
