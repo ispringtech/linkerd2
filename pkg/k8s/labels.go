@@ -8,9 +8,10 @@ package k8s
 import (
 	"fmt"
 
-	"github.com/linkerd/linkerd2/pkg/version"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
+
+	"github.com/linkerd/linkerd2/pkg/version"
 )
 
 const (
@@ -275,6 +276,9 @@ const (
 	// ProxyAccessLogAnnotation configures whether HTTP access logging is
 	// enabled, and what access log format is used.
 	ProxyAccessLogAnnotation = ProxyConfigAnnotationsPrefix + "/access-log"
+
+	// ProxyCustomEnvAnnotationPrefix for custom environment variables that will be passed to proxy container
+	ProxyCustomEnvAnnotationPrefix = ProxyConfigAnnotationsPrefix + "/env-"
 
 	// AllUnauthenticated allows all unathenticated connections.
 	AllUnauthenticated = "all-unauthenticated"

@@ -150,6 +150,9 @@ be used in other contexts.
 - name: LINKERD2_PROXY_SHUTDOWN_GRACE_PERIOD
   value: {{.Values.proxy.shutdownGracePeriod | quote}}
 {{ end -}}
+{{ if .Values.proxy.additionalEnv -}}
+{{ toYaml .Values.proxy.additionalEnv }}
+{{ end -}}
 image: {{.Values.proxy.image.name}}:{{.Values.proxy.image.version | default .Values.linkerdVersion}}
 imagePullPolicy: {{.Values.proxy.image.pullPolicy | default .Values.imagePullPolicy}}
 livenessProbe:

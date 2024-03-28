@@ -5,14 +5,15 @@ import (
 	"fmt"
 
 	"github.com/imdario/mergo"
-	"github.com/linkerd/linkerd2/pkg/charts"
-	"github.com/linkerd/linkerd2/pkg/charts/static"
-	"github.com/linkerd/linkerd2/pkg/k8s"
-	"github.com/linkerd/linkerd2/pkg/version"
 	"helm.sh/helm/v3/pkg/chart/loader"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/yaml"
+
+	"github.com/linkerd/linkerd2/pkg/charts"
+	"github.com/linkerd/linkerd2/pkg/charts/static"
+	"github.com/linkerd/linkerd2/pkg/k8s"
+	"github.com/linkerd/linkerd2/pkg/version"
 )
 
 const (
@@ -119,6 +120,9 @@ type (
 		DefaultInboundPolicy                 string           `json:"defaultInboundPolicy"`
 		AccessLog                            string           `json:"accessLog"`
 		ShutdownGracePeriod                  string           `json:"shutdownGracePeriod"`
+
+		AdditionalEnv   []corev1.EnvVar `json:"additionalEnv"`
+		ExperimentalEnv []corev1.EnvVar `json:"experimentalEnv"`
 	}
 
 	// ProxyInit contains the fields to set the proxy-init container

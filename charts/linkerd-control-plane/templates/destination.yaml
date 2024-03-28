@@ -203,6 +203,15 @@ spec:
         - -identity-trust-domain={{.Values.identityTrustDomain | default .Values.clusterDomain}}
         - -default-opaque-ports={{.Values.proxy.opaquePorts}}
         - -enable-pprof={{.Values.enablePprof | default false}}
+        {{- if or (.Values.destinationController).additionalEnv (.Values.destinationController).experimentalEnv }}
+        env:
+        {{- with (.Values.destinationController).additionalEnv }}
+        {{- toYaml . | nindent 8 -}}
+        {{- end }}
+        {{- with (.Values.destinationController).experimentalEnv }}
+        {{- toYaml . | nindent 8 -}}
+        {{- end }}
+        {{- end }}
         {{- include "partials.linkerd.trace" . | nindent 8 -}}
         image: {{.Values.controllerImage}}:{{.Values.controllerImageVersion | default .Values.linkerdVersion}}
         imagePullPolicy: {{.Values.imagePullPolicy}}
@@ -240,6 +249,15 @@ spec:
         - -log-level={{.Values.controllerLogLevel}}
         - -log-format={{.Values.controllerLogFormat}}
         - -enable-pprof={{.Values.enablePprof | default false}}
+        {{- if or (.Values.spValidator).additionalEnv (.Values.spValidator).experimentalEnv }}
+        env:
+        {{- with (.Values.spValidator).additionalEnv }}
+        {{- toYaml . | nindent 8 -}}
+        {{- end }}
+        {{- with (.Values.spValidator).experimentalEnv }}
+        {{- toYaml . | nindent 8 -}}
+        {{- end }}
+        {{- end }}
         image: {{.Values.controllerImage}}:{{.Values.controllerImageVersion | default .Values.linkerdVersion}}
         imagePullPolicy: {{.Values.imagePullPolicy}}
         livenessProbe:
